@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="org.thaliproject.p2p.cordova.BtConnectorPlugin"
+    version="0.0.0">
+    <name>BtConnector plugin</name>
+    <description>The BtConnector plugin</description>
+    <license>MIT</license>
+    <keywords>BtConnector</keywords>
+    <repo></repo>
+    <issue></issue>
+
+    <js-module src="www/BtConnectorPlugin.js" name="BtConnectorPlugin">
+        <clobbers target="BtConnectorPlugin" />
+    </js-module>
+
+	
+    <hook type="after_plugin_add" src="scripts/appAfterPluginInstall.js"/>
+
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="BtConnectorPlugin" >
+                <param name="android-package" value="org.thaliproject.p2p.cordova.BtConnectorPlugin" />
+            </feature>
+        </config-file>
+
+		 <!-- first we just use libraries, we could also do hooks and use git to get sources if needed -->
+        <source-file src="src/android/org/thaliproject/p2p/cordova/BtConnectorPlugin.java"
+                     target-dir="src/org/thaliproject/p2p/cordova" />
+		<source-file src="src/android/org/thaliproject/p2p/cordova/BTConnectedThread.java"
+                     target-dir="src/org/thaliproject/p2p/cordova" />
+					 
+		<source-file src="src/android/btconnectorlib" target-dir="."/>	
+		<framework src="src/android/BtConnectorPlugin.gradle" custom="true" type="gradleReference"/>
+    </platform>
+</plugin>
